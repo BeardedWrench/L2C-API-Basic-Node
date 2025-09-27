@@ -60,3 +60,12 @@ Update the `scripts` setion in `package.json`
     "lint:fix": "eslint src/**/*.ts --fix"
   },
 ```
+
+## Step 4: Create project Structure
+
+```
+mkdir -p src/{config,models,services,routes,middleware,utils}
+mkdir -p database
+mkdir -p dist
+```
+ 
