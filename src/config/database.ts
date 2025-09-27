@@ -1,4 +1,5 @@
 import { Pool, PoolClient, QueryResult } from 'pg';
+import { logger } from '../utils/logger';
 
 export class DatabaseConnection {
   private static instance: DatabaseConnection;
@@ -35,13 +36,13 @@ export class DatabaseConnection {
 
   private setupEventListeners(): void {
     this.pool.on('connect', (client: PoolClient) => {
-      console.log('New Client connected to the database');
+      logger.info('New Client connected to the database');
     });
     this.pool.on('remove', (client: PoolClient) => {
-      console.log('Client removed from the database pool');
+      logger.info('Client removed from the database pool');
     });
     this.pool.on('error', (err: Error, client: PoolClient) => {
-      console.log(`Unexpected error on idle client: ${err}`);
+      logger.error(`Unexpected error on idle client: ${err}`);
     });
   }
 
@@ -51,10 +52,10 @@ export class DatabaseConnection {
       const result = await client.query('SELECT NOW()');
       client.release();
 
-      console.log('Database connection test successful');
-      console.log(`Connected to PostgreSQL at: ${result.rows[0].now}`);
+      logger.info('Database connection test successful');
+      logger.info(`Connected to PostgreSQL at: ${result.rows[0].now}`);
     } catch (error) {
-      console.log(`Database connected test failed: ${error}`);
+      logger.error(`Database connected test failed: ${error}`);
       throw error;
     }
   }
@@ -64,13 +65,13 @@ export class DatabaseConnection {
     try {
       const result = await this.pool.query(text, params);
       const duration = Date.now() - start;
-      console.log(`Query executed in ${duration}ms`);
+      logger.info(`Query executed in ${duration}ms`);
 
       return result;
     } catch (error) {
-      console.log(`Database query error: ${error}`);
-      console.log(`Failed query: ${text}`);
-      console.log(`Query parameters: ${JSON.stringify(params)}`);
+      logger.error(`Database query error: ${error}`);
+      logger.error(`Failed query: ${text}`);
+      logger.error(`Query parameters: ${JSON.stringify(params)}`);
       throw error;
     }
   }
@@ -94,7 +95,7 @@ export class DatabaseConnection {
   public static async close(): Promise<void> {
     if (DatabaseConnection.instance) {
       await DatabaseConnection.instance.pool.end();
-      console.log('Database connection pool close');
+      logger.info('Database connection pool close');
     }
   }
 
