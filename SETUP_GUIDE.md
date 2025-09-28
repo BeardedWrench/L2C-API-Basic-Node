@@ -68,4 +68,10 @@ mkdir -p src/{config,models,services,routes,middleware,utils}
 mkdir -p database
 mkdir -p dist
 ```
- 
+
+## Create the database
+
+run this command to enter the docker container for postgres:
+
+`docker exec -it <container-id> bash`
+`psql -U postgres`

@@ -1,7 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
-import { timeStamp } from 'console';
 import { userRoutes } from './routes/userRoutes';
 import { errorHandler } from './middleware/errorHandler';
 import { DatabaseConnection } from './config/database';
