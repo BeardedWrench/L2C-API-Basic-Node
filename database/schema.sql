@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
     age INTEGER CHECK (age >= 0 AND age <= 100),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
-)
+);
 
 -- Created Indexes
 CREATE INDEX IF NOT EXISTS idx_users_name ON users(name);
@@ -22,15 +22,18 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+-- Drop the trigger if it already exists before creating it
+DROP TRIGGER IF EXISTS updated_users_updated_at ON users;
+
 -- Trigger for updated_at
 CREATE TRIGGER updated_users_updated_at
     BEFORE UPDATE ON users
     FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column()
+    EXECUTE FUNCTION update_updated_at_column();
 
 -- Insert sample data
 INSERT INTO users (name, email, age) VALUES
     ('John Doe', 'john@john.com', 30),
     ('Jane Smith', 'jane@jane.com', 25),
-    ('Bob Bobertson', 'bob@bob.com', 35),
+    ('Bob Bobertson', 'bob@bob.com', 35)
 ON CONFLICT (email) DO NOTHING;

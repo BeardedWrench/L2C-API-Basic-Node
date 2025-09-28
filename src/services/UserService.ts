@@ -21,7 +21,7 @@ export class UserService {
 
     const sanitizedData = sanitizeUserData(userData) as CreateUserRequest;
 
-    const validationErrors = validateUserData(sanitizeUserData);
+    const validationErrors = validateUserData(sanitizedData);
 
     if (validationErrors.length > 0) {
       throw new Error(`Validation failed: ${validationErrors.join(', ')}`);
@@ -190,7 +190,7 @@ export class UserService {
 
     const sanitizedData = sanitizeUserData(updateData) as CreateUserRequest;
 
-    const validationErrors = validateUserData(sanitizeUserData);
+    const validationErrors = validateUserData(sanitizedData);
 
     if (validationErrors.length > 0) {
       throw new Error(`Validation failed: ${validationErrors.join(', ')}`);
