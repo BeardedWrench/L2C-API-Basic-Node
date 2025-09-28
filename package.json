@@ -2,7 +2,7 @@
   "name": "l2c-api-basic-node",
   "version": "1.0.0",
   "description": "A Project for teaching backend web programming - [Learn 2 Code - BASIC - Node(ExpressJS)]",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "tsc",
