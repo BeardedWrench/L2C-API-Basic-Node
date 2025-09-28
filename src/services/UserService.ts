@@ -65,7 +65,7 @@ export class UserService {
   ): Promise<PaginatedUsersResponse> {
     logger.info('Fetching users with params: ', queryParams);
 
-    const page = Math.max(1, queryParams.page || USER_VALIDATION.DEFAULT_LIMIT);
+    const page = Math.max(1, queryParams.page || USER_VALIDATION.DEFAULT_PAGE);
     const limit = Math.min(
       USER_VALIDATION.MAX_LIMIT,
       Math.max(1, queryParams.limit || USER_VALIDATION.DEFAULT_LIMIT)
