@@ -190,7 +190,7 @@ export class UserService {
 
     const sanitizedData = sanitizeUserData(updateData) as CreateUserRequest;
 
-    const validationErrors = validateUserData(sanitizedData);
+    const validationErrors = validateUserData(sanitizedData, true);
 
     if (validationErrors.length > 0) {
       throw new Error(`Validation failed: ${validationErrors.join(', ')}`);
@@ -215,19 +215,19 @@ export class UserService {
       let paramIndex = 1;
 
       if (sanitizedData.name !== undefined) {
-        updateFields.push(`name == $${{ paramIndex }}`);
+        updateFields.push(`name = $${paramIndex}`);
         values.push(sanitizedData.name);
         paramIndex++;
       }
 
       if (sanitizedData.email !== undefined) {
-        updateFields.push(`email == $${{ paramIndex }}`);
+        updateFields.push(`email = $${paramIndex}`);
         values.push(sanitizedData.email);
         paramIndex++;
       }
 
       if (sanitizedData.age !== undefined) {
-        updateFields.push(`age == $${{ paramIndex }}`);
+        updateFields.push(`age = $${paramIndex}`);
         values.push(sanitizedData.age);
         paramIndex++;
       }

@@ -107,9 +107,9 @@ export function validateUserData(
       errors.push('Age must be a number');
     } else if (age < USER_VALIDATION.AGE_MIN) {
       errors.push(`Age must be at least ${USER_VALIDATION.AGE_MIN}`);
-    } else if (age > USER_VALIDATION.AGE_MIN) {
+    } else if (age > USER_VALIDATION.AGE_MAX) {
       errors.push(
-        `Age must be no more than ${USER_VALIDATION.AGE_MIN} characters long`
+        `Age must be no more than ${USER_VALIDATION.AGE_MAX} characters long`
       );
     }
   }
