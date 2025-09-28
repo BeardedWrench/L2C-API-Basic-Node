@@ -9,7 +9,7 @@ export interface User {
 
 export interface CreateUserRequest {
   name: string;
-  email?: string;
+  email: string;
   age?: number;
 }
 
