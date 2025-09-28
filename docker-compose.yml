@@ -9,7 +9,6 @@ services:
       POSTGRES_DB: based_crud_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_INITDB_ARGS: "--auto-host=scram-sha-256"
     ports:
       - "5423:5432"
     volumes:
